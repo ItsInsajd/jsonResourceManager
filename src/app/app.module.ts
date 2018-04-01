@@ -9,6 +9,9 @@ import { JsonComponent } from './jsonEditor/json.component';
 import { GroupComponent } from './jsonEditor/components/group.component';
 import { LangComponent } from './jsonEditor/components/lang.component';
 import { ResourceComponent } from './jsonEditor/components/resource.component';
+import { RowComponent } from './tableEditor/components/row.component';
+import { TableEditorComponent } from './tableEditor/tableEditor.component';
+import { TableComponent } from './tableEditor/components/table.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,10 @@ import { ResourceComponent } from './jsonEditor/components/resource.component';
     GroupComponent,
     JsonComponent,
     LangComponent,
-    ResourceComponent
+    ResourceComponent,
+    RowComponent,
+    TableEditorComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,

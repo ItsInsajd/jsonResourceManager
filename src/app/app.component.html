@@ -1,3 +1,5 @@
 <div class="container">
-<json-editor></json-editor>
+  <button (click)="convertToTable()" type="button" class="btn btn-primary">Switch to table</button>
+<json-editor *ngIf="!isTableView" [locale]="locale"></json-editor>
+<table-editor *ngIf="isTableView" [tableGroup]="tableGroup" [languages]="languages"></table-editor>
 </div>

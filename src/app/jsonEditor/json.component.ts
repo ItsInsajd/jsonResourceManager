@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Locale } from './models/locale';
 
 @Component({
@@ -7,10 +7,10 @@ import { Locale } from './models/locale';
   styleUrls: ['./json.component.css']
 })
 export class JsonComponent {
-  locale: Locale;
+  @Input()locale: Locale;
 
   constructor() {
-    this.locale = new Locale();
+    //this.locale = new Locale();
   }
 
   addLanguage(langName: string) {

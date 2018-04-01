@@ -1,0 +1,9 @@
+<div class="container">
+  <h5>{{table.name}}</h5>
+  <div class="input-group input-group-sm no-space">
+    <h6 class="form-control no-space"></h6>
+    <h6 *ngFor="let lang of languages" class="form-control no-space">{{lang}}</h6>
+  </div>
+  <resource-row *ngFor="let row of table.rows" [row]="row">
+  </resource-row>
+</div>

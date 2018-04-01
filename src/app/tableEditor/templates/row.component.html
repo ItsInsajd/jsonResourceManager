@@ -1,0 +1,4 @@
+<div class="input-group input-group-sm no-space">
+  <input [(ngModel)]="row.key" #keyInput type="text" class="form-control no-space" placeholder="key" value="{{row.key}}" />
+  <input *ngFor="let val of row.values" [(ngModel)]="val.value" type="text" class="form-control no-space" placeholder="value" value="{{val.value}}" />
+</div>
