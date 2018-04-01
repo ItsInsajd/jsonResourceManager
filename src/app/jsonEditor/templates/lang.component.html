@@ -1,0 +1,10 @@
+<div class="container res-container no-space" *ngFor="let group of lang.groups">
+  <h6 class="no-space">{{group.name}}</h6>
+  <group class="mb-3" [resources]="group.resources" [groupName]="group.name" [langName]="group.langName"></group>
+</div>
+<div class="no-space input-group input-group-sm mb-3">
+  <input #groupInput type="text" class="form-control" placeholder="group name" />
+  <div class="input-group-append">
+    <button (click)="addGroup(groupInput.value)" type="button" class="btn btn-outline-secondary">Add group</button>
+  </div>
+</div>

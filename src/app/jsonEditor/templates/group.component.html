@@ -1,0 +1,13 @@
+<div class="container res-container no-space">
+  <ul>
+    <li *ngFor="let res of resources">
+      <resource [resource]="res"></resource>
+    </li>
+    <!--<li>
+      <div class="input-group input-group-sm mb-3">
+        <input #keyInput [(ngModel)]="newKey" type="text" class="form-control" placeholder="key" />
+        <input #valueInput type="text" class="form-control" placeholder="value" />
+      </div>
+    </li>-->
+  </ul>
+</div>

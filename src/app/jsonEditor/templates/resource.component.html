@@ -1,0 +1,4 @@
+<div class="input-group input-group-sm no-space">
+  <input (blur)="onKeyChange()" [(ngModel)]="resource.key" #keyInput type="text" class="form-control no-space" placeholder="key" value="{{resource.key}}" />
+  <input #valueInput type="text" (input)="onValueChange($event.target.value)" class="form-control no-space" placeholder="value" value="{{resource.value}}" />
+</div>

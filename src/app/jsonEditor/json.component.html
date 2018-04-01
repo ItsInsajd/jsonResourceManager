@@ -1,0 +1,15 @@
+<h4 class="no-space">Languages</h4>
+<div class="container lang-container no-space">
+  <div class="container-fluid no-space" *ngFor="let lang of locale.languages">
+    <h5 class="no-space">{{lang.name}}</h5>
+    <lang [lang]="lang" class="lang-container"></lang>
+  </div>
+  <div class="input-group input-group-sm mb-3 no-space">
+    <input #langInput type="text" class="form-control" placeholder="pl-PL" />
+    <div class="input-group-append">
+      <button (click)="addLanguage(langInput.value)" type="button" class="btn btn-outline-secondary">
+        Add language
+      </button>
+    </div>
+  </div>
+</div>
