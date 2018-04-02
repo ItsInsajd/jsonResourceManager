@@ -1,5 +1,14 @@
 <div class="container">
-  <button (click)="convertToTable()" type="button" class="btn btn-primary">Switch to table</button>
-<json-editor *ngIf="!isTableView" [locale]="locale"></json-editor>
-<table-editor *ngIf="isTableView" [tableGroup]="tableGroup" [languages]="languages"></table-editor>
+  <ngb-tabset (tabChange)="switchView($event)">
+    <ngb-tab id="jsonTab" title="json view" (click)="convertToJson()">
+      <ng-template ngbTabContent>
+        <json-editor [locale]="locale" [languages]="languages"></json-editor>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab id="tableTab" title="table view" (click)="convertToTable()">
+      <ng-template ngbTabContent>
+        <table-editor [tables]="tables" [languages]="languages"></table-editor>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
 </div>

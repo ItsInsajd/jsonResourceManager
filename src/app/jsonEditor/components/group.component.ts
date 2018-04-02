@@ -6,7 +6,7 @@ import { Resource } from '../models/resource';
 @Component ({
   selector: 'group',
   templateUrl: '../templates/group.component.html',
-  styleUrls: ['../styles/group.component.css']
+  styleUrls: ['../styles/group.component.css', '../../app.component.css']
 })
 export class GroupComponent implements OnInit {
   @Input()resources: Array<Resource>;

@@ -5,7 +5,7 @@ import { Resource } from '../models/resource';
 @Component({
   selector: 'resource',
   templateUrl: '../templates/resource.component.html',
-  styleUrls: ['../styles/resource.component.css']
+  styleUrls: ['../styles/resource.component.css', '../../app.component.css']
 })
 export class ResourceComponent {
   @Input()resource: Resource;

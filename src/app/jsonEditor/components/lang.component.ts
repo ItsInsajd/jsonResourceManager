@@ -8,7 +8,7 @@ import { LangService } from '../../services/lang.service';
 @Component ({
   selector: 'lang',
   templateUrl: '../templates/lang.component.html',
-  styleUrls: ['../styles/lang.component.css']
+  styleUrls: ['../styles/lang.component.css', '../../app.component.css']
 })
 export class LangComponent implements OnInit, OnDestroy {
   @Input()lang: Language;
@@ -17,7 +17,7 @@ export class LangComponent implements OnInit, OnDestroy {
   constructor(private langService: LangService) { }
 
   ngOnInit() {
-    this.langSubscription = this.langService.$langSub.subscribe((group: Group) => {
+    this.langSubscription = this.langService.$groupSub.subscribe((group: Group) => {
       if (!this.lang.groups.some(g => g.name === group.name)) {
         let groupCopy = group.copy(this.lang.name);
 
@@ -34,6 +34,6 @@ export class LangComponent implements OnInit, OnDestroy {
 
   addGroup(groupName: string): void {
     let group = new Group(groupName, this.lang.name);
-    this.langService.$langSub.next(group);
+    this.langService.$groupSub.next(group);
   }
 }
