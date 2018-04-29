@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Group } from './jsonEditor/models/group';
 import { Language } from './jsonEditor/models/language';
+import { LangService } from './services/lang.service';
 import { Locale } from './jsonEditor/models/locale';
 import { Resource } from './jsonEditor/models/resource';
 import { Row } from './tableEditor/models/row';
@@ -12,27 +13,33 @@ import { Translation } from './tableEditor/models/translation';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   languages: Array<string>;
   locale: Locale;
   tables: Array<Table>;
   isTableView: boolean = false;
 
-  constructor() {
+  constructor(private langService: LangService) {
     this.languages = new Array<string>();
     this.locale = new Locale();
     this.tables = new Array<Table>();
   }
 
+  ngOnInit(): void {
+    this.langService.langSource$.subscribe((lang: string) => {
+      this.languages.push(lang);
+    });
+  }
+
   switchView($event): void {
     if ($event.nextId === 'tableTab') {
-      this.convertToTable();
+      //this.convertToTable();
     } else {
-      this.convertToJson();
+      //this.convertToJson();
     }
   }
 
-  convertToTable(): void {
+  /*convertToTable(): void {
     console.log('table');
     if (this.isTableView) return;
 
@@ -62,6 +69,10 @@ export class AppComponent {
             }
           }
         });
+        let table = this.tables.find(t => t.name == group.name);
+        if (table != null) {
+          table.rows.push(new Row ('', []));
+        }
       });
     });
 
@@ -95,5 +106,5 @@ export class AppComponent {
     this.locale.languages = langs;
 
     console.log(this.locale);
-  }
+  }*/
 }

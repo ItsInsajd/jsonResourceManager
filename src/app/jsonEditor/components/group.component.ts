@@ -2,6 +2,7 @@ import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { LangService } from '../../services/lang.service';
 import { Resource } from '../models/resource';
+import { Row } from '../../tableEditor/models/row';
 
 @Component ({
   selector: 'group',
@@ -14,13 +15,14 @@ export class GroupComponent implements OnInit {
   @Input()langName: string;
   private resSubscription: Subscription;
   private resValSub: Subscription;
+  private rowKeySub: Subscription;
 
   constructor(private langService: LangService) { }
 
   ngOnInit() {
     this.insertEmptyLine();
 
-    this.resSubscription = this.langService.$resKeySub.subscribe((res: Resource) => {
+    this.langService.resKeySource$.subscribe((res: Resource) => {
       this.insertEmptyLine();
 
       if (this.resources.some(r => r.uid === res.uid) && this.groupName === res.parentGroupName) {
@@ -29,10 +31,18 @@ export class GroupComponent implements OnInit {
         this.resources[this.resources.length-1] = res.copy(this.groupName, this.langName);
       }
     });
-    this.resValSub = this.langService.$resValSub.subscribe((res: Resource) => {
+    this.langService.resValSource$.subscribe((res: Resource) => {
       if (this.resources.some(a => a.key === res.key) && this.groupName === res.parentGroupName && this.langName == res.parentLangName) {
         this.resources.find(a => a.key === res.key).value = res.value;
+      }
+    });
+    this.langService.rowKeySource$.subscribe((row: Row) => {
+      if (this.groupName !== row.parentTableName || row.key === '') return;
+
+      if (!this.resources.some(r => r.uid === row.uid)) {
+        this.createNewResource(row);
       } else {
+        this.updateResourceKey(row);
       }
     });
   }
@@ -51,6 +61,23 @@ export class GroupComponent implements OnInit {
 
     if (!this.resources.some(r => r.key === '' && r.parentGroupName === this.groupName)) {
       this.resources.push(empty);
+    }
+  }
+
+  private createNewResource(row: Row) {
+    let res = new Resource(row.key, '', this.groupName, this.langName, row.uid);
+    if (this.resources[this.resources.length-1].key === '') {
+      this.resources[this.resources.length-1] = res;
+      this.insertEmptyLine();
+    } else {
+      this.resources.push(res);
+    }
+  }
+
+  private updateResourceKey(row: Row) {
+    let res = this.resources.find(r => r.uid === row.uid);
+    if (res) {
+      res.key = row.key;
     }
   }
 }

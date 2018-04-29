@@ -1,5 +1,9 @@
 <div class="container">
-  <ngb-tabset (tabChange)="switchView($event)">
+  <json-editor [locale]="locale" [languages]="languages"></json-editor>
+  ----------------------------------------------------------------------------------------------------------
+  <table-editor [tables]="tables" [languages]="languages"></table-editor>
+
+  <!--<ngb-tabset (tabChange)="switchView($event)">
     <ngb-tab id="jsonTab" title="json view" (click)="convertToJson()">
       <ng-template ngbTabContent>
         <json-editor [locale]="locale" [languages]="languages"></json-editor>
@@ -10,5 +14,5 @@
         <table-editor [tables]="tables" [languages]="languages"></table-editor>
       </ng-template>
     </ngb-tab>
-  </ngb-tabset>
+  </ngb-tabset>-->
 </div>

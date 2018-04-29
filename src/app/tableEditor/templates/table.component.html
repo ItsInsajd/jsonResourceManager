@@ -2,8 +2,11 @@
   <h5>{{table.name}}</h5>
   <div class="input-group input-group-sm no-space">
     <h6 class="form-control no-space"></h6>
-    <h6 *ngFor="let lang of languages" class="form-control no-space">{{lang}}</h6>
+    <input *ngIf="languages.length === 0; else langHeader" #langName (blur)="onLangInsert(langName.value)" class="form-control no-space" type="text" placeholder="lang-LANG" />
+    <ng-template #langHeader>
+      <h6 *ngFor="let lang of languages" class="form-control no-space">{{lang}}</h6>
+    </ng-template>
   </div>
-  <resource-row *ngFor="let row of table.rows" [row]="row">
+  <resource-row *ngFor="let row of table.rows" [row]="row" [tableName]="table.name">
   </resource-row>
 </div>

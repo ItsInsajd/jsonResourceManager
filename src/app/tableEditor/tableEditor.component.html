@@ -1,3 +1,11 @@
+<div class="input-group input-group-sm mb-3 no-space">
+  <input #tableInput type="text" class="form-control" placeholder="table name" />
+  <div class="input-group-append">
+    <button (click)="addTable(tableInput.value)" type="button" class="btn btn-outline-secondary">
+      Add table
+    </button>
+  </div>
+</div>
 <div class="container" *ngFor="let table of tables">
   <json-table [table]="table" [languages]="languages"></json-table>
 </div>

@@ -12,12 +12,13 @@ import { LangService } from '../../services/lang.service';
 })
 export class LangComponent implements OnInit, OnDestroy {
   @Input()lang: Language;
+  groupInput: string;
   private langSubscription: Subscription;
 
   constructor(private langService: LangService) { }
 
   ngOnInit() {
-    this.langSubscription = this.langService.$groupSub.subscribe((group: Group) => {
+    this.langService.groupSource$.subscribe((group: Group) => {
       if (!this.lang.groups.some(g => g.name === group.name)) {
         let groupCopy = group.copy(this.lang.name);
 
@@ -32,8 +33,9 @@ export class LangComponent implements OnInit, OnDestroy {
     }
   }
 
-  addGroup(groupName: string): void {
-    let group = new Group(groupName, this.lang.name);
-    this.langService.$groupSub.next(group);
+  addGroup(): void {
+    let group = new Group(this.groupInput, this.lang.name);
+    this.langService.addGroup(group);
+    this.groupInput = '';
   }
 }

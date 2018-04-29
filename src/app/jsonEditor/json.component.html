@@ -5,9 +5,9 @@
     <lang [lang]="lang" class="lang-container"></lang>
   </div>
   <div class="input-group input-group-sm mb-3 no-space">
-    <input #langInput type="text" class="form-control" placeholder="pl-PL" />
+    <input [(ngModel)]="langInput" type="text" class="form-control" placeholder="lang-LANG" />
     <div class="input-group-append">
-      <button (click)="addLanguage(langInput.value)" type="button" class="btn btn-outline-secondary">
+      <button (click)="addLanguage()" type="button" class="btn btn-outline-secondary">
         Add language
       </button>
     </div>

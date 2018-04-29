@@ -1,4 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { LangService } from '../services/lang.service';
+import { Language } from './models/language';
 import { Locale } from './models/locale';
 
 @Component({
@@ -6,16 +8,23 @@ import { Locale } from './models/locale';
   templateUrl: './json.component.html',
   styleUrls: ['./json.component.css', '../app.component.css']
 })
-export class JsonComponent {
+export class JsonComponent implements OnInit {
   @Input()locale: Locale;
   @Input()languages: Array<string>;
+  langInput: string;
 
-  constructor() {
+  constructor(private langService: LangService) {
     //this.locale = new Locale();
   }
 
-  addLanguage(langName: string) {
-    this.locale.addLanguage(langName);
-    //this.languages.push(langName);
+  ngOnInit(): void {
+    this.langService.langSource$.subscribe((lang: string) => {
+      this.locale.addLanguage(this.langInput);
+    })
+  }
+
+  addLanguage() {
+    this.langService.addLanguage(this.langInput);
+    this.langInput = '';
   }
 }

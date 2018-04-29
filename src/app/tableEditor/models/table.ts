@@ -18,4 +18,10 @@ export class Table {
       this.rows.push(new Row('', translations));
     }*/
   }
+
+  public injectNewLanguage(lang: string) {
+    this.rows.forEach(row => {
+      row.injectNewLanguage(lang);
+    })
+  }
 }
